@@ -23,9 +23,21 @@ export const Search = () => {
             });
             setResults(data.query.search) 
         }
-        if(term){
-            search();
+        if(term && !results.length){
+            search()
+        }else {
+        const timeoutid = setTimeout (() => {
+            if(term){
+                search();
+            }
+            
+        }, 1000)
+
+        return () =>{
+            clearTimeout(timeoutid)
         }
+
+    }
         
         // rule no. 2 for calling a data in useeffect
         // (async ()=>{
